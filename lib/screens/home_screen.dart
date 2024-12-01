@@ -1,114 +1,88 @@
 import 'package:flutter/material.dart';
+import '../models/product.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> jamtangan = [
-    {
-      "name": "Alba",
-      "image": "images/Alba.jpg",
-      "price": 120000,
-      "discount": 10,
-      "rating": 4.8,
-    },
-    {
-      "name": "Apple",
-      "image": "images/apple.png",
-      "price": 150000,
-      "discount": 5,
-      "rating": 4.5,
-    },
-    {
-      "name": "Fossil",
-      "image": "images/fossil.jpg",
-      "price": 200000,
-      "discount": 15,
-      "rating": 4.7,
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Timely Tresure'),
-        centerTitle: true,
-        backgroundColor: Colors.black,
+        title: Text('Timely Treasure'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {},
+          ),
+        ],
+        backgroundColor: Colors.teal,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: jamtangan.length,
-          itemBuilder: (context, index) {
-            final watch = jamtangan[index];
-            return Card(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              elevation: 5,
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      watch["image"],
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            watch["name"],
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            "Price: \$${watch["price"]}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                          if (watch["discount"] > 0)
-                            Text(
-                              "Discount: ${watch["discount"]}%",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.green,
-                              ),
-                            ),
-                          SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.orange,
-                                size: 20,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                watch["rating"].toString(),
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
+      body: GridView.builder(
+        padding: EdgeInsets.all(8),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 0.7, // Menentukan proporsi kartu
         ),
+        itemCount: productList.length,
+        itemBuilder: (context, index) {
+          final produk = productList[index];
+          return Card(
+            margin: EdgeInsets.all(10),
+            elevation: 5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Gambar produk
+                Expanded(
+                  flex: 2,
+                  child: Image.network(
+                    produk.imageAsset,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
+                // Informasi produk
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        produk.nama,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Harga: Rp${produk.harga.toString()}',
+                        style: TextStyle(decoration: TextDecoration.lineThrough),
+                      ),
+                      Text(
+                        'Harga Diskon: Rp${produk.hargaDiskon.toString()}',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      Text(
+                        'Rating: ${produk.rating} ⭐',
+                        style: TextStyle(color: Colors.amber),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '-${(produk.diskon * 100).toInt()}%',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

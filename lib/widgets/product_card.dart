@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.name,
+                    product.nama,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -40,7 +40,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    '\$${product.price.toStringAsFixed(2)}',
+                    '\$${product.harga.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey[600],
