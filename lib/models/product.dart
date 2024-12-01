@@ -100,7 +100,7 @@ List<Product> productList = [
     rating: 4.82,
   ),
   Product(
-    nama: "Patek Philipe.jpg",
+    nama: "Patek Philipe",
     imageAsset: "images/PatekPhilipe.jpg",
     harga: 980000,
     diskon: 0.17,

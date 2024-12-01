@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {},
           ),
         ],
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blueGrey,
       ),
       body: GridView.builder(
         padding: EdgeInsets.all(8),
