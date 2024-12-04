@@ -11,7 +11,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   bool isSignedIn = true;
   String fullName = "";
   String email = "";
-  int phone = "" as int;
+  String phone = "" ;
   String username = "";
   late Color iconColor;
 
