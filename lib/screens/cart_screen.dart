@@ -60,7 +60,7 @@ class CartScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: cart_buttomNavBar(),
+      bottomNavigationBar: Cartbuttomnavbar(),
     );
   }
 }
