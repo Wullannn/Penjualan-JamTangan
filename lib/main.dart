@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jamtangan/screens/cart_screen.dart';
 import 'package:jamtangan/screens/detail_screen.dart';
+import 'package:jamtangan/screens/favorit_screen.dart';
 import 'package:jamtangan/screens/home_screen.dart';
 import 'package:jamtangan/screens/profile_screen.dart';
 import 'package:jamtangan/screens/signin_screen.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -20,12 +20,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.brown,
       ),
-       //home: SigninScreen()
-      //home: HomeScreen(),
+      //home: SigninScreen()
+      // home: HomeScreen(),
       // home : DetailScreen()
-       // home : ProfileScreen()
+      // home : ProfileScreen()
       home: CartScreen(),
+      // home: FavoritScreen());
     );
   }
 }
-

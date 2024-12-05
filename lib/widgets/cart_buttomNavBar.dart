@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jamtangan/screens/checkout_screen.dart';
 
 class cart_buttomNavBar extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class cart_buttomNavBar extends StatelessWidget {
                     color: Colors.blueGrey,
                   ),
                 )
-          ],
+              ],
             ),
             Container(
               alignment: Alignment.center,
@@ -44,15 +45,38 @@ class cart_buttomNavBar extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color:  Colors.white,
+                  color: Colors.white,
                 ),
               ),
-
-            )
+            ),
+            GestureDetector(
+              onTap: () {
+                // Navigasi ke halaman CheckoutScreen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 50, // Sesuaikan ukuran tombol agar lebih besar
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Check Out",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-  
 }
