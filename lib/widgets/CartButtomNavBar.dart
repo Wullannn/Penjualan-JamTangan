@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jamtangan/screens/checkout_screen.dart';
 
-class cart_buttomNavBar extends StatelessWidget {
+class Cartbuttomnavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return BottomAppBar(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        height: 28,
+        height: 80,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -60,6 +60,28 @@ class cart_buttomNavBar extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 height: 50, // Sesuaikan ukuran tombol agar lebih besar
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Check Out",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            GestureDetector(
+              onTap: () {
+                print("klik untuk Check Out");
+              },
+              child: Container(
+                alignment: Alignment.center,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(10),
