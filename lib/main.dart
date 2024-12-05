@@ -16,16 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-      ),
-      //home: SigninScreen()
-      // home: HomeScreen(),
-      // home : DetailScreen()
-      // home : ProfileScreen()
-      home: CartScreen(),
-      // home: FavoritScreen());
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.brown,
+        ),
+        //home: SigninScreen()
+        // home: HomeScreen(),
+        // home : DetailScreen()
+        // home : ProfileScreen()
+        // home: CartScreen(),
+        home: FavoritScreen());
   }
 }
