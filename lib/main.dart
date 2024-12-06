@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jamtangan/screens/signin_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/signin_screen.dart';
 
 void main() {
   runApp(MyApp());
