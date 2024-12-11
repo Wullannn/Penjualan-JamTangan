@@ -1,109 +1,147 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(DetailScreen());
+}
+
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ProductDetailScreen(
+        product: Product(
+          name: "Produk A",
+          price: 299.99,
+          rating: 4.5,
+          imageUrl: "https://via.placeholder.com/300",
+        ),
+      ),
+    );
+  }
+}
+
+class Product {
+  final String name;
+  final double price;
+  final double rating;
+  final String imageUrl;
+
+  Product({
+    required this.name,
+    required this.price,
+    required this.rating,
+    required this.imageUrl,
+  });
+}
+
+class ProductDetailScreen extends StatelessWidget {
+  final Product product;
+
+  ProductDetailScreen({required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Details'),
-        backgroundColor: Colors.blue,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        title: Text("Detail Produk"),
+        backgroundColor: Colors.blueAccent,
       ),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // Product Image Section
-            Image.network(
-              'https://via.placeholder.com/400x400.png', // Replace with your product image URL
-              height: 300,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(height: 16.0),
-
-            // Product Title
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Awesome Product Name',
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
+          children: [
+            // Product Image
+            Center(
+              child: Image.network(
+                product.imageUrl,
+                height: 250,
+                fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 8.0),
+            SizedBox(height: 16),
+
+            // Product Name
+            Text(
+              product.name,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+
+            // Product Rating
+            Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                Text(
+                  "${product.rating}",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
 
             // Product Price
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                '\$99.99',
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),
+            Text(
+              "Rp ${product.price.toStringAsFixed(2)}",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
               ),
             ),
-            const SizedBox(height: 16.0),
+            SizedBox(height: 20),
 
-            // Product Description
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'This is a description of the product. It contains details such as the features, materials, and other important information about the product. The description helps customers understand the product better before making a purchase decision.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
+            // Button Row (Keranjang, Beli, Pesan)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Keranjang Button
+                ElevatedButton(
+                  onPressed: () {
+                    // Action for Keranjang
+                    print("Produk ditambahkan ke keranjang");
+                  },
+                  child: Text("Keranjang"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
 
-            // Action Buttons: Add to Cart and Buy Now
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange, // Background color for Add to Cart
-                    ),
-                    onPressed: () {
-                      // Add your cart logic here
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Item added to cart')),
-                      );
-                    },
-                    child: const Text('Add to Cart'),
+                // Beli Button
+                ElevatedButton(
+                  onPressed: () {
+                    // Action for Beli
+                    print("Beli produk sekarang");
+                  },
+                  child: Text("Beli"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: EdgeInsets.symmetric(horizontal: 30),
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Background color for Buy Now
-                    ),
-                    onPressed: () {
-                      // Add your checkout logic here
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Proceeding to checkout')),
-                      );
-                    },
-                    child: const Text('Buy Now'),
+                ),
+
+                // Pesan Button
+                ElevatedButton(
+                  onPressed: () {
+                    // Action for Pesan
+                    print("Pesan produk");
+                  },
+                  child: Text("Pesan"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: EdgeInsets.symmetric(horizontal: 30),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(height: 20.0),
           ],
         ),
       ),
