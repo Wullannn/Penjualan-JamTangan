@@ -50,11 +50,9 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               child: const TextField(
                 autofocus: false,
-                // TODO: 6. Implementasikan fitur pencarian
                 decoration: InputDecoration(
-                  hintText: 'Cari candi...',
+                  hintText: 'Carilah jam tangan yang kamu inginkan',
                   prefixIcon: Icon(Icons.search),
-                  // TODO: 7. Implementasikan pengosongan input
                   border: InputBorder.none,
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blueGrey)),
