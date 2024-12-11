@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jamtangan/screens/cart_screen.dart';
-import 'package:jamtangan/screens/detail_screen.dart';
-import 'package:jamtangan/screens/home_screen.dart';
-import 'package:jamtangan/screens/profile_screen.dart';
-import 'package:jamtangan/screens/signin_screen.dart';
+import 'package:jamtangan/screens/search_screen.dart';
+
 
 
 void main() {
@@ -24,7 +22,8 @@ class MyApp extends StatelessWidget {
       //home: HomeScreen(),
       // home : DetailScreen()
        // home : ProfileScreen()
-      home: CartScreen(),
+      //home: CartScreen(),
+      home: SearchScreen()
     );
   }
 }

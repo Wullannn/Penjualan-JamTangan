@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:jamtangan/models/product.dart';
 
+
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<Product> _filteredproduct = productList;
-  String _searchQuery = '';
+  List<Product> allProduct = [
+
+  ];
+
+  List<Product> filteredproduct = [];
+  String searchQuery = '';
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _filteredproduct = _allproduct;
+    filteredproduct= allProduct;
   }
 
-  void _filterWatches(String query) {
-    final filtered = _allWatches
-        .where((watch) => watch.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+  void updateSearchQuery(String query) {
     setState(() {
-      _filteredWatches = filtered;
+      searchQuery = query;
+      filteredproduct = allProduct
+          .where((watch) => watch.nama.toLowerCase().contains(query.toLowerCase()))
+          .toList();
     });
   }
 
@@ -30,54 +37,66 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Watches'),
-        backgroundColor: Colors.blueAccent,
+        title: const Text('Pencarian'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search for a watch...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.blueGrey[50],
+              ),
+              child: const TextField(
+                autofocus: false,
+                // TODO: 6. Implementasikan fitur pencarian
+                decoration: InputDecoration(
+                  hintText: 'Cari candi...',
+                  prefixIcon: Icon(Icons.search),
+                  // TODO: 7. Implementasikan pengosongan input
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueGrey)),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                 ),
               ),
-              onChanged: _filterWatches,
             ),
-            SizedBox(height: 16.0),
-            Expanded(
-              child: _filteredWatches.isNotEmpty
-                  ? ListView.builder(
-                itemCount: _filteredWatches.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(_filteredWatches[index]),
-                    leading: Icon(Icons.watch),
-                    onTap: () {
-                      // Add action when a watch is tapped
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Selected: ${_filteredWatches[index]}'),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredproduct.length,
+              itemBuilder: (context, index) {
+                final watch = filteredproduct[index];
+                return Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        width: 100,
+                        height: 100,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            watch.imageAsset,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      );
-                    },
-                  );
-                },
-              )
-                  : Center(
-                child: Text(
-                  'No results found',
-                  style: TextStyle(fontSize: 16.0, color: Colors.grey),
-                ),
-              ),
+                      ),
+
+                    ],
+                  ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
+
