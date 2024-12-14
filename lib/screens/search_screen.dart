@@ -1,100 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:jamtangan/models/product.dart';
 
-
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
-
-  @override
-  _SearchScreenState createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  List<Product> allProduct = [
-
-  ];
-
-  List<Product> filteredproduct = [];
-  String searchQuery = '';
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    filteredproduct= allProduct;
-  }
-
-  void updateSearchQuery(String query) {
-    setState(() {
-      searchQuery = query;
-      filteredproduct = allProduct
-          .where((watch) => watch.nama.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    });
-  }
-
+class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pencarian'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.blueGrey[50],
-              ),
-              child: const TextField(
-                autofocus: false,
-                decoration: InputDecoration(
-                  hintText: 'Carilah jam tangan yang kamu inginkan',
-                  prefixIcon: Icon(Icons.search),
-                  border: InputBorder.none,
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blueGrey)),
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            // Aksi untuk tombol back
+          },
+        ),
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: [
+              Icon(Icons.search, color: Colors.grey),
+              SizedBox(width: 8),
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Pencarian",
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredproduct.length,
-              itemBuilder: (context, index) {
-                final watch = filteredproduct[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        width: 100,
-                        height: 100,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
-                            watch.imageAsset,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                );
-              },
-            ),
+        ),
+      ),
+      body: Center(
+        child: Text(""),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0, // Indeks aktif (home)
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: "",
           ),
         ],
       ),
     );
   }
 }
-
